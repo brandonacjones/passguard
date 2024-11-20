@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block navigation %}
+    {% if not g.user %}
+        <li class="nav-list-item"><a class="nav-list-link" href="{{ url_for('auth.login') }}">Sign In</a></li>
+        <li class="nav-list-item"><a class="nav-list-link" href="{{ url_for('auth.register') }}">Register</a></li>
+    {% else %}
+        <li class="nav-list-item"><a class="nav-list-link" href="{{ url_for('pages.dashboard') }}">Dashboard</a></li>
+        <li class="nav-list-item"><a class="nav-list-link" href="{{ url_for('auth.logout') }}">Sign Out</a></li>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <div class="content-box">
+        <h4>About Passguard</h4>
+        <hr>
+        <p>
+            I developed this web app as a project to learn the Python Flask framework.
+            This represents my first attempt at a project that requires encryption and decryption over IP. The project
+            required me to refresh on some skills I haven't used in a long time, such as CSS stylesheets and Javascript.
+        </p>
+        <p>
+            This password manager allows you to register an account with a username and password, then uses that username
+            to generate a custom encryption key for you. When you store your credentials, they are available only through
+            your key. The thought process behind this was to minimize the dangers of a breach by requiring a separate key
+            for each user. Meaning if one account key is compromised, other users are still secure.
+        </p>
+        <h4>About Me</h4>
+        <hr>
+        <p>
+            I am a computer science graduate living in southern California. I am attempting to grow my knowledge by
+            creating projects that push my abilities. The biggest difference in the projects, like Passguard, compared to
+            projects done in college is that these projects are meant to follow industry best-practices.
+        </p>
+        <p>
+            My hope is that this website provides a useful service for you, and demonstrates my competence in full stack
+            web development.
+        </p>
+    </div>
+{% endblock %}

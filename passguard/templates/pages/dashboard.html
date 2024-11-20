@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block styles %}
+{% endblock %}
+
+{% block navigation %}
+    <li class="nav-list-item"><a class="nav-list-link" href="{{ url_for('pages.add') }}" class="btn-add">Store a Username and Password</a></li>
+{% endblock %}
+
+{% block content %}
+<div class="dashboard">
+    <div class="service-list">
+        <ul>
+            {% if not services %}
+            Looks like there's nothing here! Click "Store a Username and Password" to get started.
+            {% endif %}
+            {% for service in services %}
+            <li class="service-item">
+                <div class="service-details">
+                    <h3 class="service-name">{{ service['service_name'] }}</h3>
+                    <p class="service-username">Username: {{ service['service_username'] }}</p>
+                    <span id="password_{{ service['service_id'] }}" class="service-password">Password Hidden</span>
+                    <p class="service-url">Service URL: <a href="{{ service['service_url'] }}" target="_blank" class="service-url-link">{{ service['service_url'] }}</a></p>
+                    <button onclick="showPassword({{ service['service_id'] }})" class="btn-show">Show Password</button>
+                    <button onclick="hidePassword({{ service['service_id'] }})" class="btn-show">Hide Password</button>
+                </div>
+                {% if not loop.last %}
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+<script>
+    function showPassword(serviceId) {
+        fetch(`/decrypt/${serviceId}`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById(`password_${serviceId}`).textContent = data.password;
+            });
+    }
+    function hidePassword(serviceId) {
+        document.getElementById(`password_${serviceId}`).textContent = "Password Hidden";
+    }
+</script>
+{% endblock %}

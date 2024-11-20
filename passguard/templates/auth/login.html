@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Sign In{% endblock %}
+
+<!-- CSS -->
+{% block styles %}
+{% endblock %}
+
+{% block navigation %}
+  <li class="nav-list-item"><a class="nav-list-link" href="{{ url_for('pages.index') }}">Home</a></li>
+  <li class="nav-list-item"><a class="nav-list-link" href="{{ url_for('auth.register') }}">Register</a></li>
+{% endblock %}
+
+{% block content %}
+  <div class="form-container-outer">
+    <div class="form-title">
+      <h3>Sign In</h3>
+    </div>
+    <div class="form-container-inner">
+      <form method="post">
+        <div class="form-line-item">
+          <label for="user_username">Username</label>
+          <input class="form-input" type="text" id="user_username" name="user_username" required>
+        </div>
+        <div class="form-line-item">
+          <label for="user_password">Password</label>
+          <input class="form-input" type="password" id="user_password" name="user_password" required>
+        </div>
+        <div class="form-line-item-submit">
+          <input class="submit-button" type="submit" value="Sign In">
+        </div>
+      </form>
+    </div>
+  </div>
+
+{% endblock %}
