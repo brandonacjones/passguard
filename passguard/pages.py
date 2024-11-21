@@ -77,3 +77,7 @@ def decrypt_on_demand(service_id):
 @bp.route('/update', methods=['GET', 'POST'])
 def update():
     return render_template('pages/update.html')
+
+@bp.route('/process-service-id')
+def process_service_id():
+    

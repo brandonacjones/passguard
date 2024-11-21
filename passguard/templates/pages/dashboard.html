@@ -27,6 +27,7 @@
                     <p class="service-url">Service URL: <a href="{{ service['service_url'] }}" target="_blank" class="service-url-link">{{ service['service_url'] }}</a></p>
                     <button onclick="showPassword({{ service['service_id'] }})" class="btn-show">Show Password</button>
                     <button onclick="hidePassword({{ service['service_id'] }})" class="btn-show">Hide Password</button>
+                    <button onclick="update({{ service['service_id']}} )">Update</button>
                 </div>
                 {% if not loop.last %}
                 {% endif %}
@@ -36,16 +37,6 @@
     </div>
 </div>
 
-<script>
-    function showPassword(serviceId) {
-        fetch(`/decrypt/${serviceId}`)
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById(`password_${serviceId}`).textContent = data.password;
-            });
-    }
-    function hidePassword(serviceId) {
-        document.getElementById(`password_${serviceId}`).textContent = "Password Hidden";
-    }
+<script src="{{ url_for('static', filename='js/scripts.js') }}">
 </script>
 {% endblock %}
