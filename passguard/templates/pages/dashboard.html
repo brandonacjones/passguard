@@ -27,7 +27,7 @@
                     <p class="service-url">Service URL: <a href="{{ service['service_url'] }}" target="_blank" class="service-url-link">{{ service['service_url'] }}</a></p>
                     <button onclick="showPassword({{ service['service_id'] }})" class="btn-show">Show Password</button>
                     <button onclick="hidePassword({{ service['service_id'] }})" class="btn-show">Hide Password</button>
-                    <button onclick="update({{ service['service_id']}} )">Update</button>
+                    <button onclick="update({{ service['service_id'] }})">Update</button>
                 </div>
                 {% if not loop.last %}
                 {% endif %}
@@ -37,6 +37,43 @@
     </div>
 </div>
 
-<script src="{{ url_for('static', filename='js/scripts.js') }}">
+<script>
+    // Fetch decrypted password
+    function showPassword(serviceId) {
+    fetch(`/decrypt/${serviceId}`)
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById(`password_${serviceId}`).textContent = data.password;
+        });
+    }
+
+    // Hide decrypted password
+    function hidePassword(serviceId) {
+        document.getElementById(`password_${serviceId}`).textContent = "Password Hidden";
+    }
+
+    // Store a service_id in the session and redirect to update form
+    function update(serviceId) {
+        // Create a form to send the selected service_id to the backend
+        var formdata = new FormData();
+        formdata.append('service_id', serviceId);
+
+        // Fetch the endpoint
+        fetch('/process-service-id', {
+            method: 'POST',
+            body: formdata,
+        }) // Process the response from the server, ensure status is ok
+        .then( response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return response.json;
+        }) // Handle data 
+        .then(data => {
+            console.log('Success', data);
+            // Redirect to update form page
+            window.location.href = "{{ url_for('pages.update') }}";
+        })
+    }
 </script>
 {% endblock %}

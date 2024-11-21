@@ -15,19 +15,19 @@
         <div class="form-container-inner">
             <div class="form-line-item">
                 <label for="service_name">Service Name</label>
-                <input type="text" name="service_name" id="service_name">
+                <input type="text" name="service_name" id="service_name" value="{{ session['service_name'] }}">
             </div>
             <div class="form-line-item">
                 <label for="service_username">Username</label>
-                <input type="text" name="service_username" id="service_username">
+                <input type="text" name="service_username" id="service_username" value="{{ session['service_username']}}">
             </div>
             <div class="form-line-item">
                 <label for="service_password">Password</label>
-                <input type="text" name="service_password" id="service_password">
+                <input type="password" name="service_password" id="service_password" value="{{ session['service_password_plain'] }}">
             </div>
             <div class="form-line-item">
                 <label for="service_url">URL</label>
-                <input type="text" name="service_url" id="service_url">
+                <input type="text" name="service_url" id="service_url" value="{{ session['service_url'] }}">
             </div>
             <div class="form-line-item-submit">
                 <input type="submit" id="post">

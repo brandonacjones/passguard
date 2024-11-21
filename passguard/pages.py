@@ -76,8 +76,53 @@ def decrypt_on_demand(service_id):
 
 @bp.route('/update', methods=['GET', 'POST'])
 def update():
+    error = None;
+    new_username = request.form.get('service_username')
+    new_name = request.form.get('service_name')
+    new_password = request.form.get('service_password')
+    new_url = request.form.get('service_url')
+
+    encrypted_new_password = encrypt_password(new_password, session['session_user_username'])
+
+    if not new_username or not new_name or not new_password or not new_url:
+        error = "Missing field in update form. Ensure all fields are filled in."
+
+    db = get_db()
+    if error is None:
+        try:
+            db.execute(
+                'UPDATE service_name, service_username, service_password, service_url IN services'
+                ' VALUES (?, ?, ?, ?) WHERE user_id = ?',
+                (new_name, new_username, encrypted_new_password, new_url, session['session_user_username'])
+            )
+            db.commit()
+
+        except:
+            print("An Error Occurred during the database update operation.")
+        else:
+            redirect(url_for('pages.dashboard'))
     return render_template('pages/update.html')
 
-@bp.route('/process-service-id')
+@bp.route('/process-service-id', methods=['POST'])
 def process_service_id():
+    service_id = request.form.get('service_id')
+    db = get_db()
+    service_details = None
+    try:
+        service_details = db.execute('SELECT service_username, service_password, service_name, service_url'
+                   ' FROM services WHERE service_id = ?',
+                   (service_id, )
+                   ).fetchone()
+    except db.Error:
+        error = 'Something went wrong.'
+
+    # decrypt password for display
+    decrypted_service_password = decrypt_password(service_details['service_password'], session['session_user_username'])
+
+    session['service_name'] = service_details['service_name']
+    session['service_username'] = service_details['service_username']
+    session['service_password_plain'] = decrypted_service_password
+    session['service_url'] = service_details['service_url']
+
+    return jsonify({"message": "ServiceID processed successfully."})
     
