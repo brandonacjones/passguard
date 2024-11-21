@@ -73,3 +73,7 @@ def decrypt_on_demand(service_id):
 
     else:
         abort(404)
+
+@bp.route('/update', methods=['GET', 'POST'])
+def update():
+    return render_template('pages/update.html')

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}Update{% endblock %}
+
+{% block navigation %}
+<li class="nav-list-item"><a class="nav-list-link" href="{{ url_for('pages.dashboard') }}">Dashboard</a></li>
+{% endblock %}
+
+{% block content %}
+<div class="form-container-outer">
+    <form>
+        <div class="form-title">
+            Update Credentials
+        </div>
+        <div class="form-container-inner">
+            <div class="form-line-item">
+                <label for="service_name">Service Name</label>
+                <input type="text" name="service_name" id="service_name">
+            </div>
+            <div class="form-line-item">
+                <label for="service_username">Username</label>
+                <input type="text" name="service_username" id="service_username">
+            </div>
+            <div class="form-line-item">
+                <label for="service_password">Password</label>
+                <input type="text" name="service_password" id="service_password">
+            </div>
+            <div class="form-line-item">
+                <label for="service_url">URL</label>
+                <input type="text" name="service_url" id="service_url">
+            </div>
+            <div class="form-line-item-submit">
+                <input type="submit" id="post">
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

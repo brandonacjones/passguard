@@ -6,8 +6,10 @@
 {% endblock %}
 
 {% block navigation %}
-    <li class="nav-list-item"><a class="nav-list-link" href="{{ url_for('pages.add') }}" class="btn-add">Store a Username and Password</a></li>
-{% endblock %}
+    <li class="nav-list-item"><a class="nav-list-link" href="{{ url_for('auth.logout') }}">Sign Out</a></li>
+    <li class="nav-list-item"><a class="nav-list-link" href="{{ url_for('pages.add') }}">Store a Username and Password</a></li>
+    <li class="nav-list-item"><a class="nav-list-link" href="{{ url_for('pages.update') }}">Update</a></li>
+    {% endblock %}
 
 {% block content %}
 <div class="dashboard">
