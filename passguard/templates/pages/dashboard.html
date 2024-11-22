@@ -7,34 +7,55 @@
 
 {% block navigation %}
     <li class="nav-list-item"><a class="nav-list-link" href="{{ url_for('auth.logout') }}">Sign Out</a></li>
-    <li class="nav-list-item"><a class="nav-list-link" href="{{ url_for('pages.add') }}">Store a Username and Password</a></li>
+    <li class="nav-list-item"><a class="nav-list-link" href="{{ url_for('pages.add') }}">Add Credential</a></li>
     <li class="nav-list-item"><a class="nav-list-link" href="{{ url_for('pages.update') }}">Update</a></li>
     {% endblock %}
 
 {% block content %}
-<div class="dashboard">
+<div class="service-container-outer">
     <div class="service-list">
-        <ul>
-            {% if not services %}
-            Looks like there's nothing here! Click "Store a Username and Password" to get started.
-            {% endif %}
-            {% for service in services %}
-            <li class="service-item">
-                <div class="service-details">
-                    <h3 class="service-name">{{ service['service_name'] }}</h3>
-                    <p class="service-username">Username: {{ service['service_username'] }}</p>
-                    <span id="password_{{ service['service_id'] }}" class="service-password">Password Hidden</span>
-                    <p class="service-url">Service URL: <a href="{{ service['service_url'] }}" target="_blank" class="service-url-link">{{ service['service_url'] }}</a></p>
-                    <button onclick="showPassword({{ service['service_id'] }})" class="btn-show">Show Password</button>
-                    <button onclick="hidePassword({{ service['service_id'] }})" class="btn-show">Hide Password</button>
-                    <button onclick="update({{ service['service_id'] }})">Update</button>
-                    <button onclick="remove({{ service['service_id'] }})">Remove</button>
+        {% if not services %}
+        <div class="service-list-add">
+            <a href="{{ url_for('pages.add') }}">Add some credentials</a>
+        </div>
+        {% endif %}
+
+        {% for service in services %}
+            <div class="service">
+                <div class="service-name">
+                    {{ service['service_name'] }}
                 </div>
-                {% if not loop.last %}
-                {% endif %}
-            </li>
-            {% endfor %}
-        </ul>
+                <div class="service-detail">
+                    Username: {{ service['service_username'] }}
+                </div>
+                <div class="service-detail">
+                    <span id="password_{{ service['service_id'] }}" class="service-password">Password: ********</span>
+                </div>
+                <div class="service-detail">
+                    URL: <a href="{{ service['service_url'] }}">{{ service['service_url'] }}</a>
+                </div>
+                <div class="service-button-bar">
+                    <div class="service-button-bar-button">
+                        <button onclick="showPassword({{ service['service_id'] }})" class="btn-show">Show Password</button>
+                    </div>
+                    <div class="service-button-bar-button">
+                        <button onclick="hidePassword({{ service['service_id'] }})" class="btn-show">Hide Password</button>
+                    </div>
+                    <div class="service-button-bar-button">
+                        <button onclick="update({{ service['service_id'] }})">Update</button>
+                    </div>
+                    <div class="service-button-bar-button">
+                        <button onclick="remove({{ service['service_id'] }})">Remove</button>
+                    </div>
+                </div> 
+            </div>
+
+            {% if loop.last %}
+            <div class="service-list-add">
+                <a href="{{ url_for('pages.add') }}">Add Credential</a>
+            </div>
+            {% endif %}
+        {% endfor %}
     </div>
 </div>
 
@@ -44,13 +65,13 @@
     fetch(`/decrypt/${serviceId}`)
         .then(response => response.json())
         .then(data => {
-            document.getElementById(`password_${serviceId}`).textContent = data.password;
+            document.getElementById(`password_${serviceId}`).textContent = "Password: " + data.password;
         });
     }
 
     // Hide decrypted password
     function hidePassword(serviceId) {
-        document.getElementById(`password_${serviceId}`).textContent = "Password Hidden";
+        document.getElementById(`password_${serviceId}`).textContent = "Password: ********";
     }
 
     // Store a service_id in the session and redirect to update form
@@ -81,21 +102,22 @@
     function remove(serviceId) {
         var formdata = new FormData();
         formdata.append('service_id', serviceId);
-
-        fetch('/remove-service', {
-            method: 'POST',
-            body: formdata,
-        })
-        .then( response => {
-            if (!response.ok) {
-                throw new Error('Network response was not OK. ' + response.statusText);
-            }
-            return response.json;
-        })
-        .then( data => {
-            console.log('success', data);
-            window.location.reload();
-        })
+        if(confirm("Delete these credentials? This action cannot be reversed.")) {
+            fetch('/remove-service', {
+                method: 'POST',
+                body: formdata,
+            })
+            .then( response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not OK. ' + response.statusText);
+                }
+                return response.json;
+            })
+            .then( data => {
+                console.log('success', data);
+                window.location.reload();
+            })
+        } else {}
     }
 </script>
 {% endblock %}

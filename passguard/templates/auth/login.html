@@ -28,9 +28,14 @@
         </div>
         <div class="form-line-item-submit">
           <input class="submit-button" type="submit" value="Sign In">
+          <input type="button" onclick="cancel()" value="Cancel">
         </div>
       </form>
     </div>
   </div>
-
+  <script>
+    function cancel() {
+      window.location.href = "{{ url_for('pages.index') }}";
+    }
+  </script>
 {% endblock %}

@@ -35,9 +35,16 @@ Store Credentials
                 <input class="form-input" type="text" name="service_url" id="service_url">
             </div>
             <div class="form-line-item-submit">
-                <input class="submit-button" type="submit" value="submit">
+                <input type="submit" value="submit">
+                <input type="button" onclick="cancel()" value="Cancel">
             </div>
         </form>
     </div>
 </div>
+
+<script>
+    function cancel() {
+        window.location.href = "{{ url_for('pages.dashboard') }}";
+    }
+</script>
 {% endblock %}
