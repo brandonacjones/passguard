@@ -23,12 +23,15 @@ header, footer {
 header {
     display: flex;
     flex-direction: row;
+    width: 100%;
     height: 10vh;
     min-height: 50px;
     max-height: 80px;
     align-items: center;
     justify-content: space-between;
     background-color: #fff;
+    padding-left: 5%;
+    padding-right: 5%;
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.3);
 }
 
@@ -36,7 +39,7 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 25px;
+    box-sizing: border-box;
 }
 
 .splash-logo-link {
@@ -44,6 +47,13 @@ header {
     font-size: 30px;
     color: rgb(255, 0, 0);
     font-weight: bolder;
+    border-radius: 15px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.splash-logo-link:hover {
+    background-color: rgba(255, 0, 0, 0.05);
+    box-shadow: 0px 0px 10px 5px rgba(255, 0, 0, 0.05);
 }
 
 .nav-list-container {
@@ -67,6 +77,8 @@ header {
     font-weight: bold;
 }
 
+
+
 /* MAIN CONTENT */
 
 main {
@@ -79,22 +91,18 @@ main {
     padding: 5px;
     width: 95vw;
     max-width: 1200px;
-    background-color: #ffffff;
-    border: 1px solid#aaa;
-    border-radius: 10px;
+    background-color: #f3f3f3;
 }
 
 /* DASHBOARD */
 
 .service-container-outer {
-    background-color: rgb(255, 255, 255);
     width: 95%;
     display: flex;
     flex-direction: column;
 }
 
 .service-list {
-    background-color: #ffffff;
     display: flex;
     flex-direction: column;
 }
@@ -136,18 +144,34 @@ main {
 
 .service-button-bar-button {
     margin: 3px;
+    background-color: #fc5454;
+    border-radius: 3px;
+    height: 30px;
+    border: none;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.service-button-bar-button:hover {
+    background-color: #ea4c4c;
+    cursor: pointer;
+}
+
+.service-button-bar-button:active {
+    box-shadow: inset;
 }
 
 /* FORMS */
 
 .form-container-outer {
-    background-color: #ffffff;
+    background-color: #f3f3f3;
     padding: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 30%;
+    width: 40%;
     min-width: 350px;
+    box-sizing: border-box;
 }
 
 .form-title {
@@ -163,7 +187,7 @@ main {
     padding-bottom: 45px;
     border: 1px solid #aaa;
     border-radius: 10px;
-
+    box-sizing: border-box;
 }
 
 .form-line-item {
@@ -173,6 +197,7 @@ main {
     justify-content: space-between;
     padding: 5px;
     width: 100%;
+    min-width: 300px;
     box-sizing: border-box;
 }
 
@@ -186,7 +211,17 @@ main {
 
 .form-line-item-submit input {
     margin: 4px;
+    background-color: #fc5454;
+    border-radius: 3px;
+    height: 30px;
+    border: none;
+    color: #ffffff;
+    font-weight: bold;
+}
 
+.form-line-item-submit input:hover {
+    background-color: #ea4c4c;
+    cursor: pointer;
 }
 
 /* FOOTER */

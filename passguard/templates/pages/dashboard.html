@@ -35,18 +35,10 @@
                     URL: <a href="{{ service['service_url'] }}">{{ service['service_url'] }}</a>
                 </div>
                 <div class="service-button-bar">
-                    <div class="service-button-bar-button">
-                        <button onclick="showPassword({{ service['service_id'] }})" class="btn-show">Show Password</button>
-                    </div>
-                    <div class="service-button-bar-button">
-                        <button onclick="hidePassword({{ service['service_id'] }})" class="btn-show">Hide Password</button>
-                    </div>
-                    <div class="service-button-bar-button">
-                        <button onclick="update({{ service['service_id'] }})">Update</button>
-                    </div>
-                    <div class="service-button-bar-button">
-                        <button onclick="remove({{ service['service_id'] }})">Remove</button>
-                    </div>
+                        <button class="service-button-bar-button" onclick="showPassword({{ service['service_id'] }})" class="btn-show">Show Password</button>
+                        <button class="service-button-bar-button" onclick="hidePassword({{ service['service_id'] }})" class="btn-show">Hide Password</button>
+                        <button class="service-button-bar-button" onclick="update({{ service['service_id'] }})">Update</button>
+                        <button class="service-button-bar-button" onclick="remove({{ service['service_id'] }})">Remove</button>
                 </div> 
             </div>
 
