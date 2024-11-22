@@ -9,6 +9,9 @@ body {
     min-height: 100vh;
     min-width: 100vw;
     background-color: #f3f3f3;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: normal;
 }
 
 header, footer {
@@ -38,7 +41,9 @@ header {
 
 .splash-logo-link {
     text-decoration: none;
-    font-size: 20px;
+    font-size: 30px;
+    color: rgb(255, 0, 0);
+    font-weight: bolder;
 }
 
 .nav-list-container {
@@ -55,7 +60,11 @@ header {
 .nav-list-link {
     text-decoration: none;
     padding: 5px;
-    border: 1px solid #000;
+    color: #000000;
+}
+
+.nav-list-link:hover {
+    font-weight: bold;
 }
 
 /* MAIN CONTENT */
