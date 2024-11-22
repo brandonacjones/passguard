@@ -77,7 +77,7 @@ def decrypt_on_demand(service_id):
 @bp.route('/update', methods=['GET', 'POST'])
 def update():
     if request.method == 'POST':
-        error = None;
+        error = None
         new_username = request.form.get('service_username')
         new_name = request.form.get('service_name')
         new_password = request.form.get('service_password')
@@ -129,4 +129,28 @@ def process_service_id():
     session['service_id'] = service_id
 
     return jsonify({"message": "ServiceID processed successfully."})
+
+@bp.route('/remove-service', methods=['POST'])
+def remove_service():
+    service_id = request.form.get('service_id')
+    # Ensure service_id exists
+    if service_id is None:
+        print("No service_id exists")
+        return
+    
+    db = get_db()
+
+    try:
+        db.execute(
+            'DELETE FROM services WHERE user_id = ? AND service_id = ?',
+            (session['session_user_id'], service_id)
+        )
+        db.commit()
+        return redirect(url_for('pages.dashboard'))
+    except Exception as e:
+        print("An error occurred. {}".format(e))
+    
+    return redirect(url_for('pages.dashboard'))
+    
+
     

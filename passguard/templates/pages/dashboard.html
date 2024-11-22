@@ -28,6 +28,7 @@
                     <button onclick="showPassword({{ service['service_id'] }})" class="btn-show">Show Password</button>
                     <button onclick="hidePassword({{ service['service_id'] }})" class="btn-show">Hide Password</button>
                     <button onclick="update({{ service['service_id'] }})">Update</button>
+                    <button onclick="remove({{ service['service_id'] }})">Remove</button>
                 </div>
                 {% if not loop.last %}
                 {% endif %}
@@ -73,6 +74,27 @@
             console.log('Success', data);
             // Redirect to update form page
             window.location.href = "{{ url_for('pages.update') }}";
+        })
+    }
+
+    // Remove a Service
+    function remove(serviceId) {
+        var formdata = new FormData();
+        formdata.append('service_id', serviceId);
+
+        fetch('/remove-service', {
+            method: 'POST',
+            body: formdata,
+        })
+        .then( response => {
+            if (!response.ok) {
+                throw new Error('Network response was not OK. ' + response.statusText);
+            }
+            return response.json;
+        })
+        .then( data => {
+            console.log('success', data);
+            window.location.reload();
         })
     }
 </script>
