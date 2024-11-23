@@ -6,9 +6,8 @@
 {% endblock %}
 
 {% block navigation %}
-    <li class="nav-list-item"><a class="nav-list-link" href="{{ url_for('auth.logout') }}">Sign Out</a></li>
     <li class="nav-list-item"><a class="nav-list-link" href="{{ url_for('pages.add') }}">Add Credential</a></li>
-    <li class="nav-list-item"><a class="nav-list-link" href="{{ url_for('pages.update') }}">Update</a></li>
+    <li class="nav-list-item"><a class="nav-list-link" href="{{ url_for('auth.logout') }}">Sign Out</a></li>
     {% endblock %}
 
 {% block content %}
@@ -32,13 +31,13 @@
                     <span id="password_{{ service['service_id'] }}" class="service-password">Password: ********</span>
                 </div>
                 <div class="service-detail">
-                    URL: <a href="{{ service['service_url'] }}">{{ service['service_url'] }}</a>
+                    URL: <a href="{{ service['service_url'] }}" target="_blank">{{ service['service_url'] }}</a>
                 </div>
                 <div class="service-button-bar">
-                        <button class="service-button-bar-button" onclick="showPassword({{ service['service_id'] }})" class="btn-show">Show Password</button>
-                        <button class="service-button-bar-button" onclick="hidePassword({{ service['service_id'] }})" class="btn-show">Hide Password</button>
-                        <button class="service-button-bar-button" onclick="update({{ service['service_id'] }})">Update</button>
-                        <button class="service-button-bar-button" onclick="remove({{ service['service_id'] }})">Remove</button>
+                    <button class="service-button-bar-button" onclick="showPassword({{ service['service_id'] }})" class="btn-show">Show Password</button>
+                    <button class="service-button-bar-button" onclick="hidePassword({{ service['service_id'] }})" class="btn-show">Hide Password</button>
+                    <button class="service-button-bar-button" onclick="update({{ service['service_id'] }})">Update</button>
+                    <button class="service-button-bar-button" onclick="remove({{ service['service_id'] }})">Remove</button>
                 </div> 
             </div>
 

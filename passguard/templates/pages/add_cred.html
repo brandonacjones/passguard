@@ -8,34 +8,34 @@ Store Credentials
 {% endblock %}
 
 {% block navigation %}
-<li class="nav-list-item"><a class="nav-list-link" href="{{ url_for('pages.dashboard') }}">Dashboard</a></li>
+<li class="nav-list-item"><a class="nav-list-link" href="{{ url_for('pages.dashboard') }}">My Dashboard</a></li>
 {% endblock %}
 
 {% block content %}
 <div class="form-container-outer">
     <div class="form-title">
-        <h3>Add a Service</h3>
+        <h3>Add a Credential</h3>
     </div>
     <div class="form-container-inner">
         <form method="post">
             <div class="form-line-item">
-                <label for="service_name">Service Name:</label>
+                <label for="service_name">Service Name</label>
                 <input class="form-input" type="text" name="service_name" id="service_name" required>
             </div>
             <div class="form-line-item">
-                <label for="service_username">Username:</label>
+                <label for="service_username">Username</label>
                 <input class="form-input" type="text" name="service_username" id="service_username">
             </div>
             <div class="form-line-item">
-                <label for="service_password">Password:</label>
+                <label for="service_password">Password</label>
                 <input class="form-input" type="password" name="service_password" id="service_password" required>
             </div>
             <div class="form-line-item">
-                <label for="service_url">URL:</label>
+                <label for="service_url">Web Address</label>
                 <input class="form-input" type="text" name="service_url" id="service_url">
             </div>
             <div class="form-line-item-submit">
-                <input type="submit" value="submit">
+                <input type="submit" value="Add">
                 <input type="button" onclick="cancel()" value="Cancel">
             </div>
         </form>
